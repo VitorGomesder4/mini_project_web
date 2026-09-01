@@ -9,7 +9,13 @@ formulario.addEventListener("submit", function(event) { //Adicionando listener p
 function registrar(formulario){ //Registro onde é checado se o formulario foi preenchido
     const nome = formulario.querySelector("#nome").value.trim();
     const data_nascimento = formulario.querySelector("#data_nascimento").value;
-    const sexo = formulario.querySelector("input[name='sexo']:checked").value;
+    let sexo;
+
+    try{
+        sexo = formulario.querySelector("input[name='sexo']:checked").value;
+    } catch(TypeError){
+        sexo = "";
+    }
     
     let valido = false; //Validade para ser usado o fetch no futuro
 
