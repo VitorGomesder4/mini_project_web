@@ -1,0 +1,16 @@
+#registro_div {
+    color: blue;
+}
+
+#registro_div form > * {
+    display: block;
+    margin-top: 10px;
+}
+
+#submit {
+    margin-top: 20px;
+}
+
+#label_sexo > label:first-child {
+    display: block;
+}
