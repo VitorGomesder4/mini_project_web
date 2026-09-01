@@ -1,2 +1,4 @@
 .venv
 .env
+user.cpython-314.pyc
+__pycache__
