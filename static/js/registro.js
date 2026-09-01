@@ -32,7 +32,7 @@ function registrar(formulario){ //Registro onde é checado se o formulario foi p
             sexo: sexo
         };
 
-        fetch("registrar", {    //fetch para rota registrar
+        fetch("/registrar", {    //fetch para rota registrar
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

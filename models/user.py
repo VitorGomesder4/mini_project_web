@@ -1,16 +1,10 @@
 from datetime import datetime
-import os
 
 class User:
     def __init__(self, nome, data_nascimento, sexo):
-        self.__id_controller = os.getenv("controller_id")
         self.nome = nome
         self.data_nascimento = data_nascimento
         self.sexo = sexo
-
-    @property
-    def id_controller(self):
-        return self.__id_controller
 
     @property
     def nome(self):
