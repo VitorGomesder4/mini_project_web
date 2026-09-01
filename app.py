@@ -25,6 +25,11 @@ def index():
 def registrar():
     data = request.get_json()
 
+    try:
+        data["nome"], data["data_nascimento"], data["sexo"] = data["nome"].strip(), data["data_nascimento"].strip(), data["sexo"].strip()
+    except AttributeError:
+        return jsonify({"message": str(AttributeError)}), 400
+
     campos_must = {"nome", "data_nascimento", "sexo"}
 
     if not data or not campos_must.issubset(data.keys()):
@@ -34,6 +39,29 @@ def registrar():
         new_user = User(data["nome"], data["data_nascimento"], data["sexo"])
     except ValueError:
         return jsonify({"message": str(ValueError)}), 400
+
+    if new_user.data_nascimento == "":
+        data_nascimento = None
+    else:
+        data_nascimento = new_user.data_nascimento
+
+    if new_user.sexo == "":
+        sexo = None
+    else:
+        sexo = new_user.sexo
+
+    cursor = db.cursor()
+
+    cursor.execute(
+        """
+        INSERT INTO USER (nome, data_nascimento, sexo)
+        VALUES (%s, %s, %s)
+        """, 
+        (new_user.nome, data_nascimento, sexo)
+        )
+
+    db.commit()
+    cursor.close()
 
     return jsonify({"message": "Usuario cadastrado com sucesso"}), 200
 

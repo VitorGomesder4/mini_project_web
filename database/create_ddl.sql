@@ -1,9 +1,11 @@
 CREATE DATABASE webSite_testes;
 
+USE webSite_testes;
+
 CREATE TABLE USER (
     id_user INT NOT NULL,
     nome VARCHAR(150),
-    dt_nascimento DATE,
+    data_nascimento DATE,
     sexo CHAR(1)
 );
 
