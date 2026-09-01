@@ -1,4 +1,4 @@
-const formulario = document.getElementById("registro");  //pegando o formulaio como objeto
+const formulario = document.getElementById("registro");  //pegando o formulario como objeto
 
 formulario.addEventListener("submit", function(event) { //Adicionando listener para executar registro
     event.preventDefault();
@@ -19,6 +19,21 @@ function registrar(formulario){ //Registro onde é checado se o formulario foi p
     if (nome !== ""){
         valido = true;
         console.log("Valido", true);
+
+        const data = {      //juntando dados para envio no formato json
+            nome: nome,
+            data_nascimento: data_nascimento,
+            sexo: sexo
+        };
+
+        fetch("registrar", {    //fetch para rota registrar
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
     } else {
         console.log("Não Valido", false);
     }
