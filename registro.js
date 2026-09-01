@@ -16,7 +16,7 @@ function registrar(formulario){ //Registro onde é checado se o formulario foi p
     console.log(nome, data_nascimento, sexo);
     console.log(typeof(nome), typeof(data_nascimento), typeof(sexo));
 
-    if (nome !== "" && data_nascimento !== "" && sexo !== ""){
+    if (nome !== ""){
         valido = true;
         console.log("Valido", true);
     } else {
