@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from models.user import User
+from models.usuariosite import UserSite
 import mysql.connector
 from dotenv import load_dotenv
 import os
@@ -31,8 +32,8 @@ def registrar():
 
     try:
         data["nome"], data["data_nascimento"], data["sexo"] = data["nome"].strip(), data["data_nascimento"].strip(), data["sexo"].strip()
-    except AttributeError:
-        return jsonify({"message": str(AttributeError)}), 400
+    except AttributeError as erro:
+        return jsonify({"message": str(erro)}), 400
 
     campos_must = {"nome", "data_nascimento", "sexo"}
 
@@ -41,8 +42,8 @@ def registrar():
 
     try:
         new_user = User(data["nome"], data["data_nascimento"], data["sexo"])
-    except ValueError:
-        return jsonify({"message": str(ValueError)}), 400
+    except ValueError as erro:
+        return jsonify({"message": str(erro)}), 400
 
     if new_user.data_nascimento == "":
         data_nascimento = None
@@ -68,6 +69,60 @@ def registrar():
     cursor.close()
 
     return jsonify({"message": "Usuario cadastrado com sucesso"}), 200
+
+@app.route("/cadastrar", methods=['GET'])
+def get_cadastrar():
+    return render_template("cadastro.html")
+
+@app.route("/cadastrar", methods=['POST'])
+def cadastrar():
+    data = request.get_json()
+
+    try:
+        data["username"], data["email"], data["password"] = data["username"].strip(), data["email"].strip(), data["password"].strip()
+    except AttributeError:
+        return jsonify({"message": str(AttributeError)}), 400
+
+    campos_must = {"username", "email", "password"}
+
+    if not data or not campos_must.issubset(data.keys()):
+        return jsonify({"message": "Campos de formulario faltando ou formulario inexistente"}), 400
+
+    try:
+        if data["username"] != "" and data["password"] != "":
+            new_user_s = UserSite(data["username"], data["email"], data["password"])
+    except ValueError as erro:
+        return jsonify({"message": str(erro)}), 400
+
+    if new_user_s.email == "":
+        email = None
+    else:
+        email = new_user_s.email
+
+    cursor = db.cursor()
+
+    cursor.execute(
+        "SELECT id_user_site FROM USER_SITE WHERE username = %s",
+        (new_user_s.username,)
+    )
+
+    search_query = cursor.fetchone()
+
+    if search_query:
+        return jsonify({"message": "Nome de usuario ja cadastrado"})
+
+    cursor.execute(
+        """
+        INSERT INTO USER_SITE (username, email, password)
+        VALUES (%s, %s, %s)
+        """, 
+        (new_user_s.username, email, new_user_s.password)
+        )
+
+    db.commit()
+    cursor.close()
+
+    return jsonify({"message": "Usuario do Site cadastrado com sucesso"}), 200
 
 if __name__ == "__main__":
     app.run(debug=True)
