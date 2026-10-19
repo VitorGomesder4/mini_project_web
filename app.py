@@ -19,6 +19,10 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
+    return render_template("home.html")
+
+@app.route("/registrar", methods=['GET'])
+def r_registrar():
     return render_template("registro.html")
 
 @app.route("/registrar", methods=['POST'])
