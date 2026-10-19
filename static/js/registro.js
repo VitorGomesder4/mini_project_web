@@ -38,6 +38,15 @@ function registrar(formulario){ //Registro onde é checado se o formulario foi p
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(data)
+        })
+
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message);
+        })
+
+        .catch(error => {
+            console.error("Erro de requisição:", error);
         });
 
     } else {
