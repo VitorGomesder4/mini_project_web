@@ -1,24 +1,16 @@
+from database import db
 from flask import Flask, render_template, request, jsonify, session, url_for
 from models.user import User
 from models.usuariosite import UserSite
-import mysql.connector
-from dotenv import load_dotenv
 import os
-
-load_dotenv()
-
-DB_HOST = os.getenv("DB_HOST")
-DB_USER = os.getenv("DB_USER")
-DB_PASSWORD = os.getenv("DB_PASSWORD")
-DB_DATABASE = os.getenv("DB_DATABASE")
-
-db = mysql.connector.connect(host = DB_HOST, user = DB_USER, password = DB_PASSWORD, database = DB_DATABASE)
-
-print(db)
+from routes.tabelas.usuarios import usuarios_bp
 
 app = Flask(__name__)
 
 app.secret_key = os.getenv("FLASK_SECRET_KEY")
+
+
+app.register_blueprint(usuarios_bp)
 
 @app.route("/")
 def index():
@@ -167,32 +159,6 @@ def logar():
     else:
         return jsonify({"message": "1 ou mais campos necessarios vazios"}), 400
 
-@app.route("/usuarios", methods=["GET"])
-def get_usuarios():
-
-    inicio = request.args.get("inicio", default=0, type=int)
-    fim = request.args.get("fim", default=20, type=int)
-
-    limite = fim-inicio
-    offset_ = inicio
-
-    cursor = db.cursor(dictionary=True)
-
-    cursor.execute("""
-        SELECT id_user_site, username, email
-        FROM USER_SITE
-        ORDER BY id_user_site
-        LIMIT %s OFFSET %s
-    """, (limite, offset_))
-
-
-    lista_usuarios = cursor.fetchall()
-
-    cursor.close()
-
-    print(lista_usuarios)
-
-    return jsonify(lista_usuarios), 200
 
 @app.route("/planos", methods=["GET"])
 def get_planos():
