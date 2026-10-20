@@ -43,7 +43,11 @@ function logar(formulario){
 
     .then(response => response.json())
     .then(data => {
-        console.log(data.message);
+        console.log(data.message, data.redirect);
+
+        if(data.redirect){
+            window.location.href = data.redirect;
+        }
     })
 
     .catch(error => {
