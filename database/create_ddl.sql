@@ -46,3 +46,16 @@ CREATE TABLE assinaturas (
     FOREIGN KEY (id_plano)
         REFERENCES planos(id_plano)
 );
+
+CREATE TABLE historico_planos (
+    id_historico INT AUTO_INCREMENT PRIMARY KEY,
+    id_plano INT NOT NULL,
+    mes_referencia DATE NOT NULL,
+    preco_mensal DECIMAL(10,2) NOT NULL,
+    quantidade_assinantes INT NOT NULL,
+
+    FOREIGN KEY (id_plano)
+        REFERENCES planos(id_plano),
+
+    UNIQUE (id_plano, mes_referencia)
+);
