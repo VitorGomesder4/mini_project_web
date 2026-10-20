@@ -1,0 +1,86 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina usuario</title>
+</head>
+<body>
+
+    <h1>Visualizar dados do banco</h1>
+
+    <div>
+        <label for="tabela">Selecione a tabela:</label>
+
+        <select id="tabela" name="tabela">
+            <option value="usuarios">Usuarios</option>
+            <option value="planos">Planos</option>
+            <option value="assinaturas">Assinaturas</option>
+            <option value="historico_planos">Histórico de planos</option>
+        </select>
+
+        <button id="mostrar_tabela" type="button">Mostrar tabela</button>
+    </div>
+
+    <hr>
+
+    <table border="1" id="usuarios_option" name="usuarios_option" hidden>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+    </table>
+
+    <table border="2" id="planos_option" name="planos_option" hidden>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome do plano</th>
+                <th>Preço mensal</th>
+                <th>Qualidade de video</th>
+                <th>Telas Simultaneas</th>
+            </tr>
+        </thead>
+    </table>
+
+    <table border="3" id="assinaturas_option" name="assinaturas_option" hidden>
+        <thead>
+            <tr>
+                <th>ID_assinatura</th>
+                <th>ID_user_site</th>
+                <th>ID_plano</th>
+                <th>data_inicio</th>
+                <th>data_fim</th>
+                <th>status</th>
+            </tr>
+        </thead>
+    </table>
+
+    <table border="4" id="historico_planos_option" name="historico_planos_option" hidden>
+        <thead>
+            <tr>
+                <th>ID_historico</th>
+                <th>ID_plano</th>
+                <th>Mes de referencia</th>
+                <th>Preço mensal</th>
+                <th>Quantidade Assinantes</th>
+            </tr>
+        </thead>
+    </table>
+
+    <br>
+
+    <div>
+        <button type="button" disabled>Anterior</button>
+        <span>Página 1</span>
+        <button type="button">Mostrar mais</button>
+    </div>
+
+    <script src="../static/js/exibir_tabelas.js"></script>
+</body>
+</html>
+```
