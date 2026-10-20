@@ -1,14 +1,16 @@
-from database import db
 from flask import Flask, render_template, request, jsonify, session, url_for
 from models.user import User
 from models.usuariosite import UserSite
+from dotenv import load_dotenv
 import os
+
+load_dotenv()
+
+from database import db
 from routes.tabelas.usuarios import usuarios_bp
 
 app = Flask(__name__)
-
 app.secret_key = os.getenv("FLASK_SECRET_KEY")
-
 
 app.register_blueprint(usuarios_bp)
 
