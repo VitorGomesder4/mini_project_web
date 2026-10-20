@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, session
+from flask import Flask, render_template, request, jsonify, session, url_for
 from models.user import User
 from models.usuariosite import UserSite
 import mysql.connector
@@ -22,7 +22,11 @@ app.secret_key = os.getenv("FLASK_SECRET_KEY")
 
 @app.route("/")
 def index():
-    return render_template("home.html")
+    return render_template("index.html")
+
+@app.route("/home", methods=["GET"])
+def home():
+    return render_template("usuarioAutenticado.html")
 
 @app.route("/registrar", methods=['GET'])
 def r_registrar():
@@ -158,10 +162,15 @@ def logar():
 
         print(session)
 
-        return jsonify({"message": "Login validado so falta implementar a sessão"}), 200
+        return jsonify({"message": "Login validado", "redirect": url_for("home")}), 200
 
     else:
         return jsonify({"message": "1 ou mais campos necessarios vazios"}), 400
+
+
+@app.route("/get_usuarios", methods=["GET"])
+def get_usuarios():
+    return None
 
 if __name__ == "__main__":
     app.run(debug=True)
