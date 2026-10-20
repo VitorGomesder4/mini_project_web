@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session
 from models.user import User
 from models.usuariosite import UserSite
 import mysql.connector
@@ -17,6 +17,8 @@ db = mysql.connector.connect(host = DB_HOST, user = DB_USER, password = DB_PASSW
 print(db)
 
 app = Flask(__name__)
+
+app.secret_key = os.getenv("FLASK_SECRET_KEY")
 
 @app.route("/")
 def index():
@@ -149,6 +151,12 @@ def logar():
 
         if data["passwordCredential"] != search_query[1]:
             return jsonify({"message": "Senha incorreta"}), 400
+
+
+        session.clear()
+        session["id_user_site"] = search_query[0]
+
+        print(session)
 
         return jsonify({"message": "Login validado so falta implementar a sessão"}), 200
 
