@@ -3,7 +3,7 @@ const formulario = document.getElementById("cadastro");  //pegando o formulario 
 formulario.addEventListener("submit", function(event) { //Adicionando listener para executar registro
     event.preventDefault();
 
-    registrar(formulario);
+    cadastrar(formulario);
 });
 
 function cadastrar(formulario){ //Cadastro onde é checado se o formulario foi preenchido
@@ -26,7 +26,7 @@ function cadastrar(formulario){ //Cadastro onde é checado se o formulario foi p
             password: password
         };
 
-        fetch("/cadastrar", {    //fetch para rota registrar
+        fetch("/cadastrar", {    //fetch para rota cadastrar
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
