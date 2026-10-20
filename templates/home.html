@@ -8,6 +8,18 @@
 <body>
     <a href="/registrar">Registrar nova pessoa</a>
     <a href="/cadastrar">Cadastrar</a>
-    <a href="/login">Login</a>
+
+    <button id="login">Login</button>
+
+    <div id="modallogin" class="modal" hidden>
+        <form id="formlogin">
+            <input name="logininput" placeholder="Login">
+            <input name="password" type="password" placeholder="Senha">
+            <button type="submit">Entrar</button>
+            <button type="button" id="fecharLogin">Fechar</button>
+        </form>
+    </div>
+
+    <script src="../static/js/login.js"></script>
 </body>
 </html>
