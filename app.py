@@ -124,5 +124,36 @@ def cadastrar():
 
     return jsonify({"message": "Usuario do Site cadastrado com sucesso"}), 200
 
+
+@app.route("/login", methods=["POST"])
+def logar():
+    data = request.get_json()
+
+    campos_must = {"loginCredential", "passwordCredential"}
+
+    if not data or not campos_must.issubset(data.keys()):
+        return jsonify({"message": "Campos necessarios faltando no json"}), 400
+
+    if data["loginCredential"] != "" and data["passwordCredential"] != "":
+        cursor = db.cursor()
+
+        cursor.execute(
+                "SELECT id_user_site, password FROM USER_SITE WHERE username = %s or email = %s",
+                (data["loginCredential"], data["loginCredential"])
+            )
+
+        search_query = cursor.fetchone()
+
+        if not search_query:
+                return jsonify({"message": "Login inexistente tente novamente"}), 400
+
+        if data["passwordCredential"] != search_query[1]:
+            return jsonify({"message": "Senha incorreta"}), 400
+
+        return jsonify({"message": "Login validado so falta implementar a sessão"}), 200
+
+    else:
+        return jsonify({"message": "1 ou mais campos necessarios vazios"}), 400
+
 if __name__ == "__main__":
     app.run(debug=True)
