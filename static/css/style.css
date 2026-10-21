@@ -1,0 +1,299 @@
+/* ==========================================================
+   style.css - estilo básico para todas as páginas
+   ========================================================== */
+
+/* ---------- Variáveis (para mudar as cores em um só lugar) ---------- */
+:root {
+    --cor-fundo: #f4f6f8;
+    --cor-card: #ffffff;
+    --cor-texto: #1f2933;
+    --cor-texto-suave: #52606d;
+    --cor-principal: #2563eb;
+    --cor-principal-escura: #1d4ed8;
+    --cor-borda: #d2d6dc;
+    --raio: 8px;
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0 auto;
+    padding: 24px 16px;
+    max-width: 960px;
+    background: var(--cor-fundo);
+    color: var(--cor-texto);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Garante que o atributo "hidden" sempre esconda o elemento */
+[hidden] {
+    display: none !important;
+}
+
+h1, h2, h3 {
+    line-height: 1.25;
+    margin: 0 0 12px;
+}
+
+h1 { font-size: 1.75rem; }
+h2 { font-size: 1.4rem; margin-top: 8px; }
+h3 { font-size: 1.15rem; margin-top: 20px; }
+
+hr {
+    border: 0;
+    border-top: 1px solid var(--cor-borda);
+    margin: 24px 0;
+}
+
+a {
+    color: var(--cor-principal);
+    text-decoration: none;
+    margin-right: 12px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- Formulários ---------- */
+form {
+    background: var(--cor-card);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio);
+    padding: 20px;
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+form > div,
+form > input {
+    margin-bottom: 14px;
+}
+
+form > :last-child {
+    margin-bottom: 0;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+/* Labels dos radio buttons (Masculino / Feminino) ficam na mesma linha */
+label:has(input[type="radio"]) {
+    font-weight: 400;
+    margin-right: 16px;
+}
+
+#label_sexo > label:first-child {
+    display: block;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input:not([type]),
+select {
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 16px; /* 16px evita o zoom automático no iPhone */
+    font-family: inherit;
+    color: var(--cor-texto);
+    background: #fff;
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio);
+}
+
+input:focus,
+select:focus,
+button:focus-visible {
+    outline: 2px solid var(--cor-principal);
+    outline-offset: 1px;
+}
+
+input[type="radio"] {
+    margin-right: 4px;
+}
+
+/* Select fora de formulário (páginas de dados) não ocupa a linha toda */
+body > select,
+div > select {
+    display: inline-block;
+    width: auto;
+    max-width: 100%;
+}
+
+/* ---------- Botões ---------- */
+button,
+input[type="submit"] {
+    padding: 10px 16px;
+    font-size: 16px;
+    font-family: inherit;
+    font-weight: 600;
+    color: #fff;
+    background: var(--cor-principal);
+    border: 0;
+    border-radius: var(--raio);
+    cursor: pointer;
+}
+
+button:hover:not(:disabled),
+input[type="submit"]:hover {
+    background: var(--cor-principal-escura);
+}
+
+button:disabled {
+    background: #9aa5b1;
+    cursor: not-allowed;
+}
+
+/* Botão secundário (ex.: "Fechar" no modal de login) */
+button[type="button"]#fecharLogin {
+    background: #e4e7eb;
+    color: var(--cor-texto);
+}
+
+/* ---------- Modal de login ---------- */
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.modal form > input,
+.modal form > div {
+    margin-bottom: 0;
+}
+
+/* ---------- Tabelas ---------- */
+/* display:block + overflow permite rolar para o lado em telas pequenas */
+table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    border: 0;
+    border-collapse: collapse;
+    background: var(--cor-card);
+    border-radius: var(--raio);
+}
+
+th,
+td {
+    padding: 8px 12px;
+    text-align: left;
+    white-space: nowrap;
+    border: 1px solid var(--cor-borda);
+}
+
+th {
+    background: #e4e7eb;
+}
+
+tbody tr:nth-child(even) {
+    background: #f9fafb;
+}
+
+/* ---------- Paginação e áreas de controle ---------- */
+span {
+    margin: 0 8px;
+    color: var(--cor-texto-suave);
+}
+
+/* ---------- Gráficos ---------- */
+#grafico_regressao,
+#grafico_multipla {
+    width: 100%;
+    margin-top: 12px;
+    background: var(--cor-card);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio);
+    overflow: hidden;
+}
+
+/* Sem gráfico carregado, a caixa some em vez de aparecer vazia */
+#grafico_regressao:empty,
+#grafico_multipla:empty {
+    display: none;
+}
+
+/* ==========================================================
+   Responsivo
+   ========================================================== */
+
+/* Tablets e celulares */
+@media (max-width: 768px) {
+    body {
+        padding: 16px 12px;
+    }
+
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.25rem; }
+}
+
+/* Celulares */
+@media (max-width: 480px) {
+    body {
+        padding: 12px 10px;
+        font-size: 15px;
+    }
+
+    form {
+        padding: 16px;
+        max-width: none;
+    }
+
+    /* Botões maiores e mais fáceis de tocar */
+    button,
+    input[type="submit"] {
+        min-height: 44px;
+    }
+
+    /* Botões e selects ocupam a largura toda */
+    form button,
+    form input[type="submit"],
+    body > button,
+    body > select,
+    div > select {
+        width: 100%;
+    }
+
+    body > button,
+    div > button {
+        margin-top: 8px;
+    }
+
+    /* Links da página inicial empilhados */
+    a {
+        display: block;
+        margin: 0 0 8px;
+        padding: 10px 0;
+    }
+
+    th,
+    td {
+        padding: 6px 8px;
+        font-size: 14px;
+    }
+}
