@@ -11,6 +11,7 @@ from routes.tabelas.usuarios import usuarios_bp
 from routes.tabelas.assinaturas import assinaturas_bp
 from routes.tabelas.planos import planos_bp
 from routes.tabelas.historico_planos import historico_planos_bp
+from routes.analise import analise_regressiva_bp, analise_multipla_bp
 
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY")
@@ -19,6 +20,8 @@ app.register_blueprint(usuarios_bp)
 app.register_blueprint(assinaturas_bp)
 app.register_blueprint(planos_bp)
 app.register_blueprint(historico_planos_bp)
+app.register_blueprint(analise_regressiva_bp)
+app.register_blueprint(analise_multipla_bp)
 
 @app.route("/")
 def index():
