@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from database import db
 
-planos_bp = Blueprint("usuarios", __name__)
+planos_bp = Blueprint("planos", __name__)
 
 @planos_bp.route("/planos", methods=["GET"])
 def get_planos():

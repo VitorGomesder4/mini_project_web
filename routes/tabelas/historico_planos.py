@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from database import db
 
-historico_planos_bp = Blueprint("usuarios", __name__)
+historico_planos_bp = Blueprint("historico_planos", __name__)
 
 
 @historico_planos_bp.route("/historico_planos", methods=["GET"])

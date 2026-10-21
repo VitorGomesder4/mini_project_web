@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from database import db
 
-assinaturas_bp = Blueprint("usuarios", __name__)
+assinaturas_bp = Blueprint("assinaturas", __name__)
 
 @assinaturas_bp.route("/assinaturas", methods=["GET"])
 def get_assinaturas():
