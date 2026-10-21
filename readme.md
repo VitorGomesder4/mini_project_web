@@ -5,6 +5,10 @@
 
 ![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
 
+## Demonstração do projeto
+
+[https://youtu.be/vneP5_3VjDg](https://youtu.be/vneP5_3VjDg)
+
 ## ✨ Funcionalidades
 
 - Visualizar banco de dados
